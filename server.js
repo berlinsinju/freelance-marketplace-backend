@@ -28,7 +28,6 @@ app.post(
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-// Serve uploaded work samples
 app.use(
   "/uploads",
   express.static(path.join(__dirname, "uploads"), {
@@ -36,8 +35,11 @@ app.use(
     fallthrough: true,
   }),
 );
-
 app.get("/", (req, res) => {
+  res.send("Backend running");
+});
+
+app.get("/api/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date() });
 });
 
